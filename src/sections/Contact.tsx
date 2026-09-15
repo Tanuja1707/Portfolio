@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, MapPin, CheckCircle, Send, Award } from 'lucide-react';
-import emailjs from '@emailjs/browser';
 import { portfolioData } from '../data/portfolioData';
 
 // Import Icons
@@ -25,37 +24,45 @@ export default function Contact() {
     setContactForm({ ...contactForm, [e.target.name]: e.target.value });
   };
 
-  const handleContactSubmit = (e: React.FormEvent) => {
+  const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormLoading(true);
     setFormStatus('idle');
 
-    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_portfolio';
-    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_portfolio';
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'your_public_key';
+    const apiKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
 
-    const templateParams = {
-      name: contactForm.name,
-      email: contactForm.email,
-      subject: contactForm.subject,
-      message: contactForm.message,
-    };
+    const formData = new FormData();
+    formData.append('access_key', apiKey || '');
+    formData.append('name', contactForm.name);
+    formData.append('email', contactForm.email);
+    formData.append('subject', contactForm.subject);
+    formData.append('message', contactForm.message);
 
-    console.log('Sending email with template params:', templateParams);
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData,
+      });
 
-    emailjs.send(serviceId, templateId, templateParams, publicKey)
-      .then(() => {
+      const data = await response.json();
+
+      if (data.success) {
         setFormLoading(false);
         setFormStatus('success');
         setFormStatusMessage('Your message has been sent successfully!');
         setContactForm({ name: '', email: '', subject: '', message: '' });
-      })
-      .catch((error) => {
-        console.error('EmailJS submit error:', error);
+      } else {
+        console.error('Web3Forms submit error:', data);
         setFormLoading(false);
         setFormStatus('error');
-        setFormStatusMessage('Failed to send message. Please try again or email directly.');
-      });
+        setFormStatusMessage(data.message || 'Failed to send message. Please try again or email directly.');
+      }
+    } catch (error) {
+      console.error('Web3Forms submit error:', error);
+      setFormLoading(false);
+      setFormStatus('error');
+      setFormStatusMessage('Failed to send message. Please try again or email directly.');
+    }
   };
 
   return (

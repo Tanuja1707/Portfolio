@@ -62,7 +62,7 @@ export const portfolioData = {
     ],
     technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'PostgreSQL', 'Prisma', 'Framer Motion', 'Git', 'GitHub'],
     stats: [
-      { end: 2, suffix: '+', label: 'Industry Projects' },
+      { end: 3, suffix: '+', label: 'Industry Projects' },
       { end: 15, suffix: '+', label: 'Modules Developed' },
       { end: 20, suffix: '+', label: 'Reusable Components' },
       { end: 100, suffix: '%', label: 'Responsive Design' }
@@ -128,6 +128,32 @@ export const portfolioData = {
           'Maintaining interface consistency throughout the application.'
         ],
         outcome: "Successfully developed a feature-rich billing software that streamlined business operations and enhanced my expertise in frontend architecture, responsive design, and scalable SaaS application development."
+      }
+    },
+    virasat: {
+      title: "VIRASAT – Cultural & Heritage Discovery Platform",
+      description: "VIRASAT is a digital cultural and heritage platform designed to help users explore India's rich cultural heritage through an interactive and engaging experience. The platform brings together heritage sites, traditional art, dance, food, festivals, stories, artisans, quizzes, and location-based heritage discovery in one place.",
+      techs: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Node.js', 'Express.js', 'PostgreSQL / Supabase', 'Prisma', 'Leaflet / React Leaflet', 'Git & GitHub'],
+      tabs: {
+        features: [
+          'Interactive India heritage map.',
+          'Heritage discovery across different cities and regions supported with near me feature.',
+          'Heritage sites with detailed information.',
+          'Cultural and heritage stories.',
+          'Artisan showcase.',
+          'Interactive quizzes and gamified learning with badge-based engagement.',
+          'Hindi language support.'
+        ],
+        challenges: [
+          'Designing an interactive and intuitive heritage exploration experience.',
+          'Integrating map-based heritage discovery.',
+          'Managing cultural data across different categories.',
+          'Implementing responsive layouts for a content-rich platform.',
+          'Integrating location-based features.',
+          'Maintaining a consistent UI across multiple cultural modules.',
+          'Organizing reusable components and scalable project architecture.'
+        ],
+        outcome: "Successfully developed a modern cultural and heritage discovery platform that makes Indian heritage more interactive, accessible, and engaging for users. The project strengthened my skills in React, TypeScript, responsive UI development, API integration, database-driven applications, map integration, and collaborative software development."
       }
     }
   },
